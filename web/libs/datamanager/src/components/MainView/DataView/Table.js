@@ -120,6 +120,10 @@ export const DataView = injector(
       async (item, e) => {
         const itemID = item.task_id ?? item.id;
 
+        if (dataStore.selected?.id === itemID) {
+          return;
+        }
+
         if (store.SDK.type === 'DE') {
           store.SDK.invoke('recordPreview', item, columns, getRoot(view).taskStore.associatedList);
         } else if (e.metaKey || e.ctrlKey) {
@@ -129,7 +133,7 @@ export const DataView = injector(
           getRoot(view).startLabeling(item);
         }
       },
-      [view, columns],
+      [view, columns, dataStore.selected],
     );
 
     const renderContent = useCallback(

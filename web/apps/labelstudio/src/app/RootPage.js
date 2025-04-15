@@ -7,6 +7,7 @@ export const RootPage = ({content}) => {
   const opened = pinned && localStorage.getItem('sidebar-opened') === 'true';
 
   return (
+    /*
     <Menubar
       enabled={true}
       defaultOpened={opened}
@@ -16,5 +17,9 @@ export const RootPage = ({content}) => {
     >
       <ProjectRoutes content={content}/>
     </Menubar>
+    */
+    <>
+      <ProjectRoutes content={content} />
+    </>
   );
 };

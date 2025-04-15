@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  jtbtech-label-studio:
+    image: yillkid/jtbtech-label-studio:1.0.0
+    container_name: jtbtech-label-studio
+    ports:
+      - "8080:8080"
+
