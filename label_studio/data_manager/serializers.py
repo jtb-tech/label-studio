@@ -237,8 +237,8 @@ class DataManagerTaskSerializer(TaskSerializer):
         ret = super(DataManagerTaskSerializer, self).to_representation(obj)
 
         # Set drafts to annotations
-        if (ret["annotations"] == []):
-            ret["annotations"] = ret["drafts"]
+        # if (ret["annotations"] == []):
+        #    ret["annotations"] = ret["drafts"]
 
         if not self.context.get('annotations'):
             ret.pop('annotations', None)

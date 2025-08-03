@@ -100,3 +100,4 @@ USER 1001
 
 ENTRYPOINT ["./deploy/docker-entrypoint.sh"]
 CMD ["label-studio"]
+RUN mkdir -p /label-studio/data/media && chmod -R 777 /label-studio/data

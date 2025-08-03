@@ -137,12 +137,33 @@ def user_login(request):
     return redirect(next_page)"""
 
 
+# Session issue for 阿璋
+""""
 from django.contrib.auth import get_user_model
 @enforce_csrf_checks
 def user_login(request):
     email = 'yillkid@gmail.com'  # Replace with an email already in the database
     user = get_user_model().objects.get(email=email)
     login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+    next_page = request.GET.get('next', '/')
+    return redirect(next_page)
+"""
+
+from django.contrib.auth import get_user_model, login
+from django.contrib.sessions.models import Session
+
+@enforce_csrf_checks
+def user_login(request):
+    # 簡單檢查：如果已認證就不要重複登入
+    if request.user.is_authenticated:
+        next_page = request.GET.get('next', '/')
+        return redirect(next_page)
+    
+    # 只有真正未認證時才登入
+    email = 'yillkid@gmail.com'
+    user = get_user_model().objects.get(email=email)
+    login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+    
     next_page = request.GET.get('next', '/')
     return redirect(next_page)
 

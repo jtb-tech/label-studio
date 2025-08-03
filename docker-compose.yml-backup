@@ -25,8 +25,10 @@ services:
   app:
     stdin_open: true
     tty: true
-    build: .
-    image: heartexlabs/label-studio:latest
+    # build: .
+    # image: heartexlabs/label-studio:latest
+    image: yillkid/jtbtech-label-studio:1.31.2
+    container_name: labelstudio-app
     restart: unless-stopped
     expose:
       - "8000"
@@ -43,7 +45,12 @@ services:
       - JSON_LOG=1
     #      - LOG_LEVEL=DEBUG
     volumes:
-      - ./mydata:/label-studio/data:rw
+      - services:
+  app:
+    ...
+    volumes:
+      - /home/yillkid/.local/share/label-studio:/label-studio/data
+      # - ./mydata:/label-studio/data:rw
     command: label-studio-uwsgi
 
   db:
